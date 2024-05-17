@@ -120,4 +120,35 @@ public class PracticeFormTests extends TestBase {
 
         registrationPage.checkFormNotDisplayed();
     }
+
+    @Test
+    @Tag("registration")
+    @Feature("Падающий тест")
+    void fallingTest() {
+        registrationPage.openPage()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setUserEmail(userEmail)
+                .setGender(userGender)
+                .setUserNumber(userNumber)
+                .setBirthDate(birthDay, birthMonth, birthYear)
+                .setSubject(userSubject)
+                .setHobby(userHobby)
+                .uploadPicture(userPictureUpload)
+                .setAddress(userAddress)
+                .setState(state)
+                .setCity(city)
+                .pressSubmit();
+
+        registrationPage.checkResult(FormKeys.NAME.getKey(), fullName)
+                .checkResult(FormKeys.EMAIL.getKey(), userEmail)
+                .checkResult(FormKeys.GENDER.getKey(), userGender)
+                .checkResult(FormKeys.MOBILE.getKey(), userNumber)
+                .checkResult(FormKeys.BIRTH.getKey(), birthDate)
+                .checkResult(FormKeys.SUBJECT.getKey(), userSubject)
+                .checkResult(FormKeys.HOBBY.getKey(), userHobby)
+                .checkResult(FormKeys.PICTURE.getKey(), userPictureDisplayed)
+                .checkResult(FormKeys.ADDRESS.getKey(), userAddress)
+                .checkResult(FormKeys.STATE_AND_CITY.getKey(), userAddress);
+    }
 }
